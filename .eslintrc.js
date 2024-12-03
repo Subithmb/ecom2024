@@ -1,3 +1,4 @@
+// .eslintrc.cjs
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -21,6 +22,6 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    'no-console': ['error', { allow: ['warn', 'error'] }]  // Disallow console.log, allow console.warn and console.error
+    'no-console': ['error', { allow: ['warn', 'error'] }],
   },
 };

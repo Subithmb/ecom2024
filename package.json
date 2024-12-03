@@ -2,6 +2,7 @@
   "name": "e-com24",
   "version": "0.0.1",
   "description": "",
+  "type": "module",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
@@ -35,8 +36,8 @@
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.1",
     "@types/supertest": "^2.0.12",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
     "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
@@ -69,11 +70,11 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
   },
- "lint-staged": {
-  "*.{ts,tsx,js,jsx}": [
-    "eslint --fix",
-    "prettier --write"
-  ]
-},
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }
