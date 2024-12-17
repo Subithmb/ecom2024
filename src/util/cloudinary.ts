@@ -13,7 +13,6 @@ export async function uploadFileToCloudinary(
     throw new HttpException('File is required', HttpStatus.BAD_REQUEST);
   }
 
-  // Retrieve Cloudinary configurations
   const cloudName = configService.get<string>('your_cloud_name');
   const apiKey = configService.get<string>('your_api_key');
   const apiSecret = configService.get<string>('your_api_secret');
@@ -25,8 +24,6 @@ export async function uploadFileToCloudinary(
       HttpStatus.INTERNAL_SERVER_ERROR,
     );
   }
-
-  // Set up Cloudinary config
   cloudinary.config({
     cloud_name: cloudName,
     api_key: apiKey,
@@ -34,12 +31,11 @@ export async function uploadFileToCloudinary(
   });
 
   try {
-    // Upload the file directly to Cloudinary using upload_stream
     const result: UploadApiResponse = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
-          folder: 'uploads', // Folder in Cloudinary
-          resource_type: 'auto', // Specify the resource type (image, video, etc.)
+          folder: 'uploads',
+          resource_type: 'auto',
         },
         (error: UploadApiErrorResponse, uploadResult: UploadApiResponse) => {
           if (error) return reject(error);
@@ -47,11 +43,9 @@ export async function uploadFileToCloudinary(
         },
       );
 
-      // Pipe the file buffer to Cloudinary upload stream
       uploadStream.end(file.buffer);
     });
 
-    // Return success response with Cloudinary URL
     return {
       message: 'File uploaded successfully',
       cloudinaryUrl: result.secure_url,
