@@ -10,6 +10,7 @@ import { comparePassword, encodePassword } from 'src/util/bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { generateToken } from 'src/util/jwtAuthService';
 import { LoginResponse } from './type/typo';
+import { CreateUserDto } from './dto/createUser.dto.';
 
 @Injectable()
 export class UserService {
@@ -24,10 +25,16 @@ export class UserService {
     return users;
   }
 
-  async create(user: User): Promise<User> {
-    const password = await encodePassword(user?.password);
-    const res = await this.userModel.create({ ...user, password });
-    return res;
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const password = await encodePassword(createUserDto.password);
+
+    const userData: Partial<User> = {
+      ...createUserDto,
+      password,
+    };
+
+    const createdUser = new this.userModel(userData);
+    return createdUser.save();
   }
 
   async login(email: string, password: string): Promise<LoginResponse> {
