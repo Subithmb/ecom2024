@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { CategoryModule } from './product/category/category.module';
 import { ProductModule } from './product/product.module';
+import { CartModule } from './product/cart/cart.module';
 
 @Module({
   imports: [
@@ -17,11 +18,12 @@ import { ProductModule } from './product/product.module';
     MongooseModule.forRoot(process.env.MONGO_URI),
     JwtModule.register({
       secret: process.env.JWT_SECRET_KEY,
-      signOptions: { expiresIn: '1h' },
+      signOptions: { expiresIn: '1d' },
     }),
     UserModule,
     CategoryModule,
     ProductModule,
+    CartModule,
   ],
   controllers: [AppController],
   providers: [AppService],

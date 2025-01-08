@@ -6,9 +6,11 @@ import {
   Patch,
   Delete,
   Param,
+  UseGuards,
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CategoryDto } from './categoryDto';
+import { JwtGuard } from 'src/util/jwt.guard';
 
 @Controller('category')
 export class CategoryController {
@@ -17,6 +19,7 @@ export class CategoryController {
   /* eslint-enable */
 
   @Post()
+  @UseGuards(JwtGuard)
   async create(@Body() createCategoryDto: CategoryDto) {
     return this.categoryService.create(createCategoryDto);
   }
