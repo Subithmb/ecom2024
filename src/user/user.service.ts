@@ -49,4 +49,8 @@ export class UserService {
     const token = generateToken(user, this.jwtService);
     return { user, token };
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  async findUserById(userId: string): Promise<any> {
+    return await this.userModel.find({ userId }).populate('productId').exec();
+  }
 }

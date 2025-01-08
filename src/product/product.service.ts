@@ -19,4 +19,9 @@ export class ProductService {
   async findAll(): Promise<Product[]> {
     return this.productModel.find().exec();
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  async findProductById(productId: string): Promise<any> {
+    return await this.productModel.findById(productId).exec();
+  }
 }

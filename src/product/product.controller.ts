@@ -7,6 +7,7 @@ import {
   UploadedFiles,
   HttpException,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './product.schema';
@@ -15,6 +16,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config';
 import { uploadFileToCloudinary } from 'src/util/cloudinary';
 import { CategoryService } from './category/category.service';
+import { JwtGuard } from 'src/util/jwt.guard';
 
 @Controller('product')
 export class ProductController {
@@ -27,7 +29,8 @@ export class ProductController {
   /* eslint-enable */
 
   @Post()
-  @UseInterceptors(FilesInterceptor('images'))
+  @UseGuards(JwtGuard)
+  @UseInterceptors(FilesInterceptor('images[]'))
   async create(
     @Body() productDto: ProductDto,
     @UploadedFiles() images: Express.Multer.File[],
@@ -42,7 +45,7 @@ export class ProductController {
         HttpStatus.BAD_REQUEST,
       );
     }
-
+    //................
     if (images && images.length > 0) {
       try {
         for (const image of images) {
