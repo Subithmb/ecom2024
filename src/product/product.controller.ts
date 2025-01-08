@@ -45,7 +45,7 @@ export class ProductController {
         HttpStatus.BAD_REQUEST,
       );
     }
-
+    //................
     if (images && images.length > 0) {
       try {
         for (const image of images) {
